@@ -44,34 +44,53 @@ void print_node(Node* n){
 }
 
 int is_valid(Node* n){
-int fil[9][9] = {0};
-   int colum[9][9] = {0};
-   int subM[9][9] = {0};
-   int i,j;
-   for(i=0;i<9;i++){
-      for(j=0;j<9;j++){
-         int num = n->sudo[i][j];
-         if(num != 0){
-            int submatriz = (i/3)*3 + (j/3);
-            if(fil[i][num-1] == 1 || colum[j][num-1] == 1 || subM[submatriz][num-1] == 1){
-               return 0;
-            }
-            fil[i][num-1] = 1;
-            colum[j][num-1] = 1;
-            subM[submatriz][num-1] = 1;
-         }
+  int fil[9][9] = {0};
+  int colum[9][9] = {0};
+  int subM[9][9] = {0};
+  int i,j;
+  for(i=0;i<9;i++){
+    for(j=0;j<9;j++){
+      int num = n->sudo[i][j];
+      if(num != 0){
+        int submatriz = (i/3)*3 + (j/3);
+        if(fil[i][num-1] == 1 || colum[j][num-1] == 1 || subM[submatriz][num-1] == 1){
+          return 0;
+        }
+        fil[i][num-1] = 1;
+        colum[j][num-1] = 1;
+        subM[submatriz][num-1] = 1;
       }
-   }
-    return 1;
+    }
+  }
+  return 1;
 }
 
 
 List* get_adj_nodes(Node* n){
-    List* list=createList();
+  List* list=createList();
+  int fila = -1;
+  int columna = -1;
+  int i,j;
+  for(i=0;i<9;i++){
+    for(j=0;j<9;j++){
+      if(n->sudo[i][j] == 0){
+        fila = i;
+        columna = j;
+        break;
+      }
+    }
+    if(fila != -1) break;
+  }
+  if(fila == -1 && columna == -1){
     return list;
+  }
+  for(i=0;i<9;i++){
+    Node* new_node = copy(n);
+    new_node->sudo[fila][columna] = i+1;
+    pushBack(list, new_node);
+  }
+  return list;   
 }
-
-
 int is_final(Node* n){
 for(int i = 0; i < 9; i++) {
       for(int j = 0; j < 9; j++){
