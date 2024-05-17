@@ -44,7 +44,24 @@ void print_node(Node* n){
 }
 
 int is_valid(Node* n){
-
+int fil[9][9] = {0};
+   int colum[9][9] = {0};
+   int subM[9][9] = {0};
+   int i,j;
+   for(i=0;i<9;i++){
+      for(j=0;j<9;j++){
+         int num = n->sudo[i][j];
+         if(num != 0){
+            int submatriz = (i/3)*3 + (j/3);
+            if(fil[i][num-1] == 1 || colum[j][num-1] == 1 || subM[submatriz][num-1] == 1){
+               return 0;
+            }
+            fil[i][num-1] = 1;
+            colum[j][num-1] = 1;
+            subM[submatriz][num-1] = 1;
+         }
+      }
+   }
     return 1;
 }
 
