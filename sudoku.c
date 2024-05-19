@@ -105,11 +105,11 @@ for(int i = 0; i < 9; i++) {
 Node* DFS(Node* initial, int* cont){
   Stack* stack = createStack();
   push(stack, initial);
-  cont = 0;
+  *cont = 0;
   while(!is_empty(stack)){
     Node* n = top(stack);
     pop(stack);
-    cont ++;
+    (*cont) ++;
     if(is_final(n)){
       while(is_empty(stack)){
         Node* aux = top(stack);
