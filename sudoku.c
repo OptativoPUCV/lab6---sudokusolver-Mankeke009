@@ -103,30 +103,32 @@ for(int i = 0; i < 9; i++) {
 }
 
 Node* DFS(Node* initial, int* cont){
-  Stack* stack = createStack();
+Stack *stack = createStack();
   push(stack, initial);
   *cont = 0;
-  while(!is_empty(stack)){
-    Node* n = top(stack);
+
+  while (!is_empty(stack)) {
+    Node *n = top(stack);
     pop(stack);
-    (*cont) ++;
-    if(is_final(n)){
-      while(is_empty(stack)){
-        Node* aux = top(stack);
+    (*cont)++;
+    if (is_final(n)) {
+      while (is_empty(stack)) {
+        Node *aux = top(stack);
         pop(stack);
         free(aux);
       }
       free(stack);
       return n;
     }
-    List* list = get_adj_nodes(n);
-    Node* aux = first(list);
-    while(aux){
+
+    List *adj = get_adj_nodes(n);
+    Node *aux = first(adj);
+    while (aux) {
       push(stack, aux);
-      aux = next(list);
+      aux = next(adj);
     }
     free(n);
-    free(list);
+    free(adj);
   }
   free(stack);
   return NULL;
