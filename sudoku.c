@@ -108,7 +108,7 @@ for(int i = 0; i < 9; i++) {
 }
 
 Node* DFS(Node* initial, int* cont){
-  /*Stack* stack = createStack();
+  Stack* stack = createStack();
   push(stack, initial);
   cont = 0;
   while(!is_empty(stack)){
@@ -133,7 +133,7 @@ Node* DFS(Node* initial, int* cont){
     free(n);
     free(list);
   }
-  free(stack);*/
+  free(stack);
   return NULL;
 }
 
