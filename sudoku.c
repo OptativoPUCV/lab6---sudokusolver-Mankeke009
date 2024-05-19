@@ -116,6 +116,7 @@ Node* DFS(Node* initial, int* cont){
         pop(stack);
         free(aux);
       }
+      free(stack);
       return n;
     }
     List* list = get_adj_nodes(n);
